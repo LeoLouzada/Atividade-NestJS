@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, PrimaryColumn } from "typeorm";
+
+const { nanoid } = require("nanoid")
 
 @Entity("cidades")
 export class Cidade {
@@ -10,4 +12,9 @@ export class Cidade {
     
     @Column()
     estado: string;
+
+    @BeforeInsert()
+    generateId(){
+        this.id = `cid_${nanoid()}`
+    }
 }

@@ -3,24 +3,24 @@ POST http://localhost:3000/uf
 Content-Type: application/json
 
 {
-  "sigla": "SP",
-  "nome": "São Paulo"
+  "sigla": "",
+  "nome": ""
 }
 
 ### Listar UFs
-GET http://localhost:3000/uf
+GET http://localhost:3000/id
 
 ### Buscar UF por ID
-GET http://localhost:3000/uf/1
+GET http://localhost:3000/uf/id
 
 ### Atualizar UF
-PUT http://localhost:3000/uf/1
+PUT http://localhost:3000/uf/id
 Content-Type: application/json
 
 {
-  "sigla": "MG",
-  "nome": "Minas Gerais"
+  "sigla": "",
+  "nome": ""
 }
 
 ### Remover UF
-DELETE http://localhost:3000/uf/1
+DELETE http://localhost:3000/uf/id

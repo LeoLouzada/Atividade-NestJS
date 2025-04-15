@@ -2,29 +2,29 @@ POST http://localhost:3000/estudante
 Content-Type: application/json
 
 {
-  "nome": "Leonardo",
-  "email": "leonardo@gmail.com",
-  "idade": 20,
-  "cidadeId": 1
+  "nome": "",
+  "email": "",
+  "idade": ,
+  "cidadeId": 
 }
 ###
 
 GET http://localhost:3000/estudante
 ###
 
-GET http://localhost:3000/estudante/1
+GET http://localhost:3000/estudante/id
 ###
 
-PUT http://localhost:3000/estudante/1
+PUT http://localhost:3000/estudante/id
 Content-Type: application/json
 
 {
-  "nome": "Lucas",
-  "email": "leucas@gmail.com",
-  "idade": 21,
-  "cidadeId": 2
+  "nome": "",
+  "email": "",
+  "idade": ,
+  "cidadeId": 
 }
 ###
 
-DELETE http://localhost:3000/estudante/1
+DELETE http://localhost:3000/estudante/id
 ###

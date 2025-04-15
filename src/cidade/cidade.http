@@ -2,25 +2,25 @@ POST http://localhost:3000/cidade
 Content-Type: application/json
 
 {
-  "nome": "São Paulo",
-  "estado": "SP"
+  "nome": "",
+  "estado": ""
 }
 ###
 
 GET http://localhost:3000/cidade
 ###
 
-GET http://localhost:3000/cidade/1
+GET http://localhost:3000/cidade/id
 ###
 
-PUT http://localhost:3000/cidade/1
+PUT http://localhost:3000/cidade/id
 Content-Type: application/json
 
 {
-  "nome": "Belo Horizonte",
-  "estado": "MG"
+  "nome": "",
+  "estado": ""
 }
 ###
 
-DELETE http://localhost:3000/cidade/1
+DELETE http://localhost:3000/cidade/id
 ###
