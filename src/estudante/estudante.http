@@ -1,0 +1,30 @@
+POST http://localhost:3000/estudante
+Content-Type: application/json
+
+{
+  "nome": "Leonardo",
+  "email": "leonardo@gmail.com",
+  "idade": 20,
+  "cidadeId": 1
+}
+###
+
+GET http://localhost:3000/estudante
+###
+
+GET http://localhost:3000/estudante/1
+###
+
+PUT http://localhost:3000/estudante/1
+Content-Type: application/json
+
+{
+  "nome": "Lucas",
+  "email": "leucas@gmail.com",
+  "idade": 21,
+  "cidadeId": 2
+}
+###
+
+DELETE http://localhost:3000/estudante/1
+###
