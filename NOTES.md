@@ -1,99 +1,102 @@
+### Integrantes e Matrículas:
+- Nome: Leonardo Louzada de Melo | Matrícula: UC23100791
+- Nome: Leonardo Rodrigues Amorim Filho | Matrícula: UC23101012
 
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+---
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# NOTES.md
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Introdução
 
-## Description
+O NestJS é um framework para Node.js que utiliza TypeScript e é fortemente inspirado na arquitetura do Angular. É voltado para a construção de aplicações escaláveis do lado do servidor, utilizando padrões como injeção de dependência, módulos, serviços e controladores.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
+## Criando o Projeto
 
 ```bash
-$ npm install
+npm i -g @nestjs/cli
+nest new projeto-crud
 ```
 
-## Compile and run the project
+Ao rodar o comando, o CLI cria a estrutura inicial com:
+- pasta `src/` contendo `main.ts`, `app.module.ts`, etc.
+- instalação automática das dependências com npm ou yarn.
+
+## Criando a API com o Gerador de Código
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+nest generate resource ufs
+nest generate resource cidades
+nest generate resource estudantes
 ```
 
-## Run tests
+Selecionamos a opção **REST API** e **Yes** para gerar o CRUD completo (Controller, Service, DTOs, Module).
+
+## Validação de Dados
+
+Instalar `class-validator` e `class-transformer`:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm i class-validator class-transformer
 ```
 
-## Deployment
+Utilizar decorators como `@IsString()`, `@IsNotEmpty()` nos DTOs para garantir integridade dos dados.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## TypeORM e SQLite
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Instalar dependências:
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm i --save @nestjs/typeorm typeorm sqlite3
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Configuração em `app.module.ts`:
 
-## Resources
+```ts
+TypeOrmModule.forRoot({
+  type: 'sqlite',
+  database: 'db.sqlite',
+  entities: [Uf, Cidade, Estudante],
+  synchronize: true,
+}),
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+## Injeção de Dependência
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Feita automaticamente pelo NestJS via `@Injectable()`. Os repositórios e serviços são injetados nos controllers:
 
-## Support
+```ts
+constructor(private readonly ufService: UfService) {}
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Lógica na Service
 
-## Stay in touch
+Toda a lógica de negócio, como interação com banco de dados e validações, fica dentro da service:
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```ts
+async findAll(): Promise<Uf[]> {
+  return this.ufRepository.find();
+}
+```
 
-## License
+## Bônus: Boas Práticas REST
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- Utilizar nomes de rotas no plural: `/ufs`, `/cidades`, `/estudantes`
+- Utilizar corretamente métodos HTTP: GET, POST, PUT, DELETE
+- Retornar status HTTP apropriados (201 Created, 404 Not Found, etc)
+
+## Próximos Passos
+
+- Implementar autenticação e autorização
+- Validações mais robustas (relacionais)
+- Conectar com PostgreSQL
+- Testes automatizados
+
+## Desafio!
+
+Expandir o projeto criando relacionamentos entre as entidades:
+- Uma UF possui várias Cidades
+- Uma Cidade possui vários Estudantes
+
+Implementar buscas por relação (ex: listar estudantes de uma cidade, cidades de uma UF).
+
+Documentar e testar tudo com REST Client via `requests.http`.
