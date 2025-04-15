@@ -111,10 +111,4 @@ async findAll(): Promise<Uf[]> {
 
 ## Desafio!
 
-Expandir o projeto criando relacionamentos entre as entidades:
-- Uma UF possui várias Cidades
-- Uma Cidade possui vários Estudantes
-
-Implementar buscas por relação (ex: listar estudantes de uma cidade, cidades de uma UF).
-
-Documentar e testar tudo com REST Client via `requests.http`.
+**LEIA A DOCUMENTAÇÃO DO NEST**
